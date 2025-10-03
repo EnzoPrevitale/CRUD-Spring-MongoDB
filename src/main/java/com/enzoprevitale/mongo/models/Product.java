@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
+import java.util.Map;
 
 @Document(collection = "product")
 public class Product {
@@ -15,6 +16,7 @@ public class Product {
     private float price;
     private String description;
     private LocalDate releaseDate;
+    private Map<String, ?> dataFields;
 
     public String getId() {
         return id;
@@ -55,4 +57,8 @@ public class Product {
     public void setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
     }
+
+    public Map<String, ?> getDataFields() {return dataFields;}
+
+    public void setDataFields(Map<String, ?> dataFields) {this.dataFields = dataFields;}
 }
