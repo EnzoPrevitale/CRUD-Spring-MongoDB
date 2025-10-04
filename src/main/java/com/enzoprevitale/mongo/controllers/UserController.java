@@ -3,6 +3,7 @@ package com.enzoprevitale.mongo.controllers;
 import com.enzoprevitale.mongo.dtos.UserDto;
 import com.enzoprevitale.mongo.models.User;
 import com.enzoprevitale.mongo.services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +31,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> post(@RequestBody UserDto dto) {
+    public ResponseEntity<User> post(@Valid @RequestBody UserDto dto) {
         User user = service.create(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }

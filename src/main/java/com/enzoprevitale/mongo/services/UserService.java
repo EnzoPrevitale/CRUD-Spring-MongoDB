@@ -3,6 +3,7 @@ package com.enzoprevitale.mongo.services;
 import com.enzoprevitale.mongo.dtos.UserDto;
 import com.enzoprevitale.mongo.models.User;
 import com.enzoprevitale.mongo.repositories.UserRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -39,7 +40,7 @@ public class UserService {
     public User create(UserDto dto) {
         User user = new User();
         BeanUtils.copyProperties(dto, user);
-        user.setPassword(encoder.encode(dto.passoword()));
+        user.setPassword(encoder.encode(dto.password()));
         return repository.save(user);
     }
 
@@ -48,7 +49,7 @@ public class UserService {
         return user.map(u -> {
             if(dto.username() != null) u.setUsername(dto.username());
             else if(dto.email() != null) u.setEmail(dto.email());
-            else if(dto.passoword() != null) u.setPassword(encoder.encode(dto.passoword()));
+            else if(dto.password() != null) u.setPassword(encoder.encode(dto.password()));
             return repository.save(u);
         });
     }
